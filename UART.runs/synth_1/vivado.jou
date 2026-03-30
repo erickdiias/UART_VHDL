@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2024.2 (64-bit)
+# SW Build 5239630 on Fri Nov 08 22:35:27 MST 2024
+# IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+# SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+# Start of session at: Fri Mar 27 15:16:36 2026
+# Process ID         : 2884
+# Current directory  : C:/Users/soare/Desktop/UART/UART/UART.runs/synth_1
+# Command line       : vivado.exe -log uart_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source uart_top.tcl
+# Log file           : C:/Users/soare/Desktop/UART/UART/UART.runs/synth_1/uart_top.vds
+# Journal file       : C:/Users/soare/Desktop/UART/UART/UART.runs/synth_1\vivado.jou
+# Running On         : DESKTOP-8PBERSO
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 22621
+# Processor Detail   : Intel(R) Core(TM) i5-4590 CPU @ 3.30GHz
+# CPU Frequency      : 3292 MHz
+# CPU Physical cores : 4
+# CPU Logical cores  : 4
+# Host memory        : 8455 MB
+# Swap memory        : 4351 MB
+# Total Virtual      : 12806 MB
+# Available Virtual  : 2639 MB
+#-----------------------------------------------------------
+source uart_top.tcl -notrace
