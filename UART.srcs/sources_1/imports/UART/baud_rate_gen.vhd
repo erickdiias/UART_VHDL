@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 entity baud_rate_gen is
     generic (
-        CLK_FREQ : integer := 50_000_000;  -- Frequência do relógio em Hz (50 MHz padrão)
+        CLK_FREQ : integer := 100_000_000;  -- Frequência do relógio em Hz (100 MHz padrão)
         BAUD_RATE : integer := 9600        -- Taxa de baud em bps
     );
     port (
