@@ -21,3 +21,4 @@
 # Total Virtual      : 17967 MB
 # Available Virtual  : 6742 MB
 #-----------------------------------------------------------
+source uart_top.tcl -notrace
