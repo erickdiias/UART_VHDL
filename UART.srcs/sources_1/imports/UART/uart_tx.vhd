@@ -49,12 +49,13 @@ begin
                                         i_tx_data(2) xor i_tx_data(3) xor
                                         i_tx_data(4) xor i_tx_data(5) xor
                                         i_tx_data(6) xor i_tx_data(7);
-                            o_tx_busy <= '1';
+                            
                             state <= TX_START;
                         end if;
 
                     when TX_START =>
                         o_tx <= '0'; -- Start bit
+                        o_tx_busy <= '1';
                         state <= TX_DATA;
                         bit_count <= 0;
 
@@ -77,7 +78,7 @@ begin
 
                     when TX_STOP =>
                         o_tx <= '1'; -- Stop bit
-                        o_tx_busy <= '0';
+                        o_tx_busy <= '1';
                         state <= TX_IDLE;
                 end case;
             end if;
