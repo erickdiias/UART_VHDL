@@ -7,7 +7,7 @@ entity uart_tx is
     port(
         i_clk         : in std_logic;
         i_rst         : in std_logic;
-        i_baud_tick   : in std_logic;      -- Clock da taxa de baud
+        i_baud_tick   : in std_logic;
         i_tx_enable   : in std_logic;
         i_tx_data     : in std_logic_vector (7 downto 0);
         i_tx_parity   : in std_logic;      -- 0 = par, 1 = ímpar
