@@ -116,3 +116,112 @@ Start Technology Mapping
 ---------------------------------------------------------------------------------
 Finished Technology Mapping : Time (s): cpu = 00:00:41 ; elapsed = 00:00:47 . Memory (MB): peak = 1379.199 ; gain = 832.016
 ---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:55 ; elapsed = 00:01:02 . Memory (MB): peak = 1610.504 ; gain = 1063.320
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:55 ; elapsed = 00:01:02 . Memory (MB): peak = 1610.504 ; gain = 1063.320
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:55 ; elapsed = 00:01:02 . Memory (MB): peak = 1610.504 ; gain = 1063.320
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:55 ; elapsed = 00:01:02 . Memory (MB): peak = 1610.504 ; gain = 1063.320
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:55 ; elapsed = 00:01:02 . Memory (MB): peak = 1610.504 ; gain = 1063.320
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:55 ; elapsed = 00:01:02 . Memory (MB): peak = 1610.504 ; gain = 1063.320
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |     4|
+|3     |LUT1   |     2|
+|4     |LUT2   |    14|
+|5     |LUT3   |     2|
+|6     |LUT4   |     5|
+|7     |LUT5   |     5|
+|8     |LUT6   |     9|
+|9     |FDCE   |    31|
+|10    |FDPE   |     1|
+|11    |IBUF   |    12|
+|12    |OBUF   |     2|
++------+-------+------+
+
+Report Instance Areas: 
++------+--------------+--------------+------+
+|      |Instance      |Module        |Cells |
++------+--------------+--------------+------+
+|1     |top           |              |    88|
+|2     |  baud_gen    |baud_rate_gen |    37|
+|3     |  transmissor |uart_tx       |    36|
++------+--------------+--------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:55 ; elapsed = 00:01:02 . Memory (MB): peak = 1610.504 ; gain = 1063.320
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:55 ; elapsed = 00:01:03 . Memory (MB): peak = 1610.504 ; gain = 1063.320
+Synthesis Optimization Complete : Time (s): cpu = 00:00:55 ; elapsed = 00:01:03 . Memory (MB): peak = 1610.504 ; gain = 1063.320
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1625.520 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 4 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1735.453 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 61b04a0d
+INFO: [Common 17-83] Releasing license: Synthesis
+24 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:00 ; elapsed = 00:01:09 . Memory (MB): peak = 1735.453 ; gain = 1194.113
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1735.453 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/User/Desktop/UART_VHDL/UART.runs/synth_1/uart_top.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file uart_top_utilization_synth.rpt -pb uart_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Mar 31 15:20:09 2026...
