@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 entity uart_top is
     generic (
-        CLK_FREQ : integer := 50_000_000;  -- Frequência do relógio em Hz
+        CLK_FREQ : integer := 100_000_000;  -- Frequência do relógio em Hz
         BAUD_RATE : integer := 9600        -- Taxa de baud em bps
     );
     port (
@@ -36,7 +36,7 @@ begin
         );
     
     -- Instância do transmissor UART
-    uart_transmitter : entity work.uart_tx
+    transmissor : entity work.uart_tx
         port map (
             i_clk => clk,
             i_rst => rst,
