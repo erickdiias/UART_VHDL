@@ -35,3 +35,14 @@ INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
 INFO: [Synth 8-7075] Helper process launched with PID 14152
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:18 ; elapsed = 00:00:20 . Memory (MB): peak = 1079.598 ; gain = 532.414
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'uart_top' [C:/Users/User/Desktop/UART_VHDL/UART.srcs/sources_1/imports/UART/uart_top.vhd:22]
+INFO: [Synth 8-638] synthesizing module 'baud_rate_gen' [C:/Users/User/Desktop/UART_VHDL/UART.srcs/sources_1/imports/UART/baud_rate_gen.vhd:17]
+	Parameter CLK_FREQ bound to: 100000000 - type: integer 
+	Parameter BAUD_RATE bound to: 9600 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'baud_rate_gen' (0#1) [C:/Users/User/Desktop/UART_VHDL/UART.srcs/sources_1/imports/UART/baud_rate_gen.vhd:17]
+INFO: [Synth 8-638] synthesizing module 'uart_tx' [C:/Users/User/Desktop/UART_VHDL/UART.srcs/sources_1/imports/UART/uart_tx.vhd:20]
+INFO: [Synth 8-256] done synthesizing module 'uart_tx' (0#1) [C:/Users/User/Desktop/UART_VHDL/UART.srcs/sources_1/imports/UART/uart_tx.vhd:20]
+INFO: [Synth 8-256] done synthesizing module 'uart_top' (0#1) [C:/Users/User/Desktop/UART_VHDL/UART.srcs/sources_1/imports/UART/uart_top.vhd:22]
