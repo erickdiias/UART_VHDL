@@ -1,0 +1,41 @@
+# ========================
+# VIVADO / FPGA
+# ========================
+
+# Arquivos de log
+*.log
+*.jou
+*.str
+
+# Arquivos de simulação
+*.wdb
+*.wcfg
+
+# Arquivos gerados
+*.pb
+*.vds
+
+# Pastas geradas automaticamente
+*.runs/
+*.sim/
+*.cache/
+*.hw/
+*.ip_user_files/
+
+# ========================
+# TEMP / SISTEMA
+# ========================
+*.tmp
+*.backup
+.DS_Store
+
+# ========================
+# PYTHON (se usar)
+# ========================
+__pycache__/
+*.pyc
+
+# ========================
+# JUPYTER
+# ========================
+.ipynb_checkpoints/
