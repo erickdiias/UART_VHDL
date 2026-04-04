@@ -25,8 +25,8 @@ architecture tb of uart_top_tb is
     signal tx_data    : std_logic_vector(7 downto 0) := (others => '0');
     signal tx_parity  : std_logic := '0';
 
-    signal tx_busy    : std_logic;
-    signal tx         : std_logic;
+    signal tx_busy    : std_logic := '0';
+    signal tx         : std_logic := '1';
 
 begin
 

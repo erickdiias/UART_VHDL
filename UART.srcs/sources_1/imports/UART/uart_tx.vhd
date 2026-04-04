@@ -19,12 +19,25 @@ entity uart_tx is
 end uart_tx;
 
 architecture Behavioral of uart_tx is
+
+    -- Maquina de estados para controle da transmissão
     type state_type is (TX_IDLE, TX_START_BIT, TX_DATA_BIT, TX_PARITY_BIT, TX_STOP_BIT);
     signal state : state_type := TX_IDLE;
 
     signal bit_count : integer range 0 to 7 := 0;
     signal shift_reg : std_logic_vector(7 downto 0);
     signal parity_bit : std_logic := '0';
+
+    -- Função para calcular a paridade
+    function calc_parity(data : std_logic_vector(7 downto 0)) return std_logic is
+        variable parity : std_logic := '0';
+    begin
+        for i in data'range loop
+            parity := parity xor data(i);
+        end loop;
+        return parity;
+    end function;
+
 begin
     process(i_clk, i_rst)
     begin
@@ -44,17 +57,15 @@ begin
                         bit_count <= 0;
 
                         if i_tx_enable = '1' then
-                            -- Cálculo da paridade (par por padrão)
-                            parity_bit <= i_tx_data(0) xor i_tx_data(1) xor
-                                          i_tx_data(2) xor i_tx_data(3) xor
-                                          i_tx_data(4) xor i_tx_data(5) xor
-                                          i_tx_data(6) xor i_tx_data(7);
-
                             state <= TX_START_BIT;
                         end if;
 
                     when TX_START_BIT =>
                         shift_reg <= i_tx_data;
+
+                        -- Cálculo da paridade 
+                        parity_bit <= calc_parity(i_tx_data);
+
                         o_tx <= '0'; -- Start bit
                         o_tx_busy <= '1';
                         state <= TX_DATA_BIT;
