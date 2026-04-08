@@ -9,10 +9,11 @@ entity uart_tx is
         i_clk         : in std_logic;
         i_rst         : in std_logic;
         i_baud_tick   : in std_logic;
-        i_tx_enable   : in std_logic;
+        i_tx_start   : in std_logic;
         i_tx_data     : in std_logic_vector (7 downto 0);
         i_tx_parity   : in std_logic;      -- 0 = par, 1 = ímpar
 
+        o_tx_done     : out std_logic;
         o_tx_busy     : out std_logic;
         o_tx          : out std_logic
     );
@@ -56,7 +57,7 @@ begin
                         o_tx_busy <= '0';
                         bit_count <= 0;
 
-                        if i_tx_enable = '1' then
+                        if i_tx_start = '1' then
                             state <= TX_START_BIT;
                         end if;
 
