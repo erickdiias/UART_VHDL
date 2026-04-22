@@ -1,4 +1,4 @@
--- Esse
+
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -11,11 +11,10 @@ entity uart_tx is
         i_baud_tick   : in std_logic;
         i_tx_start   : in std_logic;
         i_tx_data     : in std_logic_vector (7 downto 0);
-        i_tx_parity   : in std_logic;      -- 0 = par, 1 = ímpar
+        i_tx_parity   : in std_logic;  -- 0 = par, 1 = ímpar
 
-        o_tx_done     : out std_logic;
-        o_tx_busy     : out std_logic;
-        o_tx          : out std_logic
+        o_tx_busy     : out std_logic; -- Transmissão em andamento
+        o_tx          : out std_logic 
     );
 end uart_tx;
 
@@ -26,18 +25,8 @@ architecture Behavioral of uart_tx is
     signal state : state_type := TX_IDLE;
 
     signal bit_count : integer range 0 to 7 := 0;
-    signal shift_reg : std_logic_vector(7 downto 0);
+    signal shift_reg : std_logic_vector(7 downto 0) := (others => '0');
     signal parity_bit : std_logic := '0';
-
-    -- Função para calcular a paridade
-    function calc_parity(data : std_logic_vector(7 downto 0)) return std_logic is
-        variable parity : std_logic := '0';
-    begin
-        for i in data'range loop
-            parity := parity xor data(i);
-        end loop;
-        return parity;
-    end function;
 
 begin
     process(i_clk, i_rst)
@@ -65,7 +54,8 @@ begin
                         shift_reg <= i_tx_data;
 
                         -- Cálculo da paridade 
-                        parity_bit <= calc_parity(i_tx_data);
+                        parity_bit <= i_tx_data(0) xor i_tx_data(1) xor i_tx_data(2) xor i_tx_data(3) xor 
+                                      i_tx_data(4) xor i_tx_data(5) xor i_tx_data(6) xor i_tx_data(7);
 
                         o_tx <= '0'; -- Start bit
                         o_tx_busy <= '1';
@@ -81,11 +71,11 @@ begin
                         end if;
 
                     when TX_PARITY_BIT =>
-                        -- Ajusta a paridade conforme o tipo (0 = par, 1 = ímpar)
+                        
                         if i_tx_parity = '0' then
-                            o_tx <= parity_bit;           -- Paridade par
+                            o_tx <= parity_bit;
                         else
-                            o_tx <= not parity_bit;       -- Paridade ímpar
+                            o_tx <= not parity_bit;
                         end if;
                         state <= TX_STOP_BIT;
 

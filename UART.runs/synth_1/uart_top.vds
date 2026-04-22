@@ -3,8 +3,8 @@
 # SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
 # IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
 # SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-# Start of session at: Thu Apr  2 13:38:02 2026
-# Process ID         : 3740
+# Start of session at: Mon Apr 13 10:59:48 2026
+# Process ID         : 3280
 # Current directory  : C:/Users/User/Desktop/UART_VHDL/UART.runs/synth_1
 # Command line       : vivado.exe -log uart_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source uart_top.tcl
 # Log file           : C:/Users/User/Desktop/UART_VHDL/UART.runs/synth_1/uart_top.vds
@@ -17,12 +17,12 @@
 # CPU Physical cores : 4
 # CPU Logical cores  : 8
 # Host memory        : 16893 MB
-# Swap memory        : 1180 MB
-# Total Virtual      : 18073 MB
-# Available Virtual  : 1542 MB
+# Swap memory        : 1073 MB
+# Total Virtual      : 17967 MB
+# Available Virtual  : 4457 MB
 #-----------------------------------------------------------
 source uart_top.tcl -notrace
-create_project: Time (s): cpu = 00:00:18 ; elapsed = 00:00:13 . Memory (MB): peak = 534.141 ; gain = 220.016
+create_project: Time (s): cpu = 00:00:38 ; elapsed = 00:00:26 . Memory (MB): peak = 534.207 ; gain = 218.910
 Command: read_checkpoint -auto_incremental -incremental C:/Users/User/Desktop/UART_VHDL/UART.srcs/utils_1/imports/synth_1/uart_top.dcp
 INFO: [Vivado 12-5825] Read reference checkpoint from C:/Users/User/Desktop/UART_VHDL/UART.srcs/utils_1/imports/synth_1/uart_top.dcp for incremental synthesis
 INFO: [Vivado 12-7989] Please ensure there are no constraint changes
@@ -34,9 +34,9 @@ INFO: [Designutils 20-5440] No compile time benefit to using incremental synthes
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 10652
+INFO: [Synth 8-7075] Helper process launched with PID 10196
 ---------------------------------------------------------------------------------
-Starting Synthesize : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1078.488 ; gain = 532.211
+Starting Synthesize : Time (s): cpu = 00:00:17 ; elapsed = 00:00:21 . Memory (MB): peak = 1082.164 ; gain = 534.988
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-638] synthesizing module 'uart_top' [C:/Users/User/Desktop/UART_VHDL/UART.srcs/sources_1/imports/UART/uart_top.vhd:22]
 INFO: [Synth 8-638] synthesizing module 'baud_rate_gen' [C:/Users/User/Desktop/UART_VHDL/UART.srcs/sources_1/imports/UART/baud_rate_gen.vhd:17]
@@ -46,19 +46,28 @@ INFO: [Synth 8-256] done synthesizing module 'baud_rate_gen' (0#1) [C:/Users/Use
 INFO: [Synth 8-638] synthesizing module 'uart_tx' [C:/Users/User/Desktop/UART_VHDL/UART.srcs/sources_1/imports/UART/uart_tx.vhd:21]
 INFO: [Synth 8-256] done synthesizing module 'uart_tx' (0#1) [C:/Users/User/Desktop/UART_VHDL/UART.srcs/sources_1/imports/UART/uart_tx.vhd:21]
 INFO: [Synth 8-256] done synthesizing module 'uart_top' (0#1) [C:/Users/User/Desktop/UART_VHDL/UART.srcs/sources_1/imports/UART/uart_top.vhd:22]
+WARNING: [Synth 8-3848] Net tx_dout in module/entity uart_top does not have driver. [C:/Users/User/Desktop/UART_VHDL/UART.srcs/sources_1/imports/UART/uart_top.vhd:24]
+WARNING: [Synth 8-7129] Port tx_din[7] in module uart_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port tx_din[6] in module uart_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port tx_din[5] in module uart_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port tx_din[4] in module uart_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port tx_din[3] in module uart_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port tx_din[2] in module uart_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port tx_din[1] in module uart_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port tx_din[0] in module uart_top is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished Synthesize : Time (s): cpu = 00:00:07 ; elapsed = 00:00:09 . Memory (MB): peak = 1197.781 ; gain = 651.504
+Finished Synthesize : Time (s): cpu = 00:00:23 ; elapsed = 00:00:28 . Memory (MB): peak = 1201.023 ; gain = 653.848
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1197.781 ; gain = 651.504
+Finished Constraint Validation : Time (s): cpu = 00:00:25 ; elapsed = 00:00:30 . Memory (MB): peak = 1201.023 ; gain = 653.848
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7s50csga324-1
-INFO: [Device 21-403] Loading part xc7s50csga324-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1197.781 ; gain = 651.504
+INFO: [Device 21-403] Loading part xc7s50csga324-1
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:25 ; elapsed = 00:00:30 . Memory (MB): peak = 1201.023 ; gain = 653.848
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'uart_tx'
 ---------------------------------------------------------------------------------------------------
@@ -72,7 +81,7 @@ INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'uart_
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'uart_tx'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:10 . Memory (MB): peak = 1197.781 ; gain = 651.504
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:26 ; elapsed = 00:00:31 . Memory (MB): peak = 1201.023 ; gain = 653.848
 ---------------------------------------------------------------------------------
 No constraint files found.
 ---------------------------------------------------------------------------------
@@ -92,7 +101,7 @@ Detailed RTL Component Info :
 +---Muxes : 
 	   5 Input    3 Bit        Muxes := 2     
 	   2 Input    1 Bit        Muxes := 2     
-	   5 Input    1 Bit        Muxes := 7     
+	   5 Input    1 Bit        Muxes := 6     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -109,21 +118,29 @@ No constraint files found.
 ---------------------------------------------------------------------------------
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
+WARNING: [Synth 8-7129] Port tx_din[7] in module uart_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port tx_din[6] in module uart_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port tx_din[5] in module uart_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port tx_din[4] in module uart_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port tx_din[3] in module uart_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port tx_din[2] in module uart_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port tx_din[1] in module uart_top is either unconnected or has no load
+WARNING: [Synth 8-7129] Port tx_din[0] in module uart_top is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:12 ; elapsed = 00:00:15 . Memory (MB): peak = 1379.125 ; gain = 832.848
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:39 ; elapsed = 00:00:50 . Memory (MB): peak = 1385.090 ; gain = 837.914
 ---------------------------------------------------------------------------------
 No constraint files found.
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:12 ; elapsed = 00:00:15 . Memory (MB): peak = 1379.125 ; gain = 832.848
+Finished Timing Optimization : Time (s): cpu = 00:00:40 ; elapsed = 00:00:50 . Memory (MB): peak = 1385.090 ; gain = 837.914
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:12 ; elapsed = 00:00:15 . Memory (MB): peak = 1379.125 ; gain = 832.848
+Finished Technology Mapping : Time (s): cpu = 00:00:40 ; elapsed = 00:00:51 . Memory (MB): peak = 1385.090 ; gain = 837.914
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -141,37 +158,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1610.707 ; gain = 1064.430
+Finished IO Insertion : Time (s): cpu = 00:00:57 ; elapsed = 00:01:10 . Memory (MB): peak = 1616.301 ; gain = 1069.125
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1610.707 ; gain = 1064.430
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:57 ; elapsed = 00:01:10 . Memory (MB): peak = 1616.301 ; gain = 1069.125
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1610.707 ; gain = 1064.430
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:57 ; elapsed = 00:01:11 . Memory (MB): peak = 1616.301 ; gain = 1069.125
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1610.707 ; gain = 1064.430
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:57 ; elapsed = 00:01:11 . Memory (MB): peak = 1616.301 ; gain = 1069.125
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1610.707 ; gain = 1064.430
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:57 ; elapsed = 00:01:11 . Memory (MB): peak = 1616.301 ; gain = 1069.125
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1610.707 ; gain = 1064.430
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:57 ; elapsed = 00:01:11 . Memory (MB): peak = 1616.301 ; gain = 1069.125
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -190,47 +207,46 @@ Report Cell Usage:
 |1     |BUFG   |     1|
 |2     |CARRY4 |     4|
 |3     |LUT1   |     2|
-|4     |LUT2   |    15|
-|5     |LUT3   |     1|
-|6     |LUT4   |     5|
-|7     |LUT5   |     5|
-|8     |LUT6   |    10|
-|9     |FDCE   |    31|
-|10    |FDPE   |     1|
-|11    |IBUF   |    12|
-|12    |OBUF   |     2|
+|4     |LUT2   |    14|
+|5     |LUT4   |     5|
+|6     |LUT5   |     3|
+|7     |LUT6   |     5|
+|8     |FDCE   |    22|
+|9     |FDPE   |     1|
+|10    |IBUF   |     4|
+|11    |OBUF   |     2|
 +------+-------+------+
 
 Report Instance Areas: 
 +------+--------------+--------------+------+
 |      |Instance      |Module        |Cells |
 +------+--------------+--------------+------+
-|1     |top           |              |    89|
+|1     |top           |              |    63|
 |2     |  baud_gen    |baud_rate_gen |    37|
-|3     |  transmissor |uart_tx       |    37|
+|3     |  transmissor |uart_tx       |    19|
 +------+--------------+--------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1610.707 ; gain = 1064.430
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:57 ; elapsed = 00:01:11 . Memory (MB): peak = 1616.301 ; gain = 1069.125
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1610.707 ; gain = 1064.430
-Synthesis Optimization Complete : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1610.707 ; gain = 1064.430
+Synthesis finished with 0 errors, 0 critical warnings and 17 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:57 ; elapsed = 00:01:11 . Memory (MB): peak = 1616.301 ; gain = 1069.125
+Synthesis Optimization Complete : Time (s): cpu = 00:00:57 ; elapsed = 00:01:11 . Memory (MB): peak = 1616.301 ; gain = 1069.125
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1624.754 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1631.359 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 4 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1736.559 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1740.418 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Synth Design complete | Checksum: c12828a7
+Synth Design complete | Checksum: c8ce8ca5
 INFO: [Common 17-83] Releasing license: Synthesis
-24 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+24 Infos, 17 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:20 ; elapsed = 00:00:23 . Memory (MB): peak = 1736.559 ; gain = 1196.352
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1736.559 ; gain = 0.000
+synth_design: Time (s): cpu = 00:01:07 ; elapsed = 00:01:22 . Memory (MB): peak = 1740.418 ; gain = 1200.457
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1740.418 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'C:/Users/User/Desktop/UART_VHDL/UART.runs/synth_1/uart_top.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file uart_top_utilization_synth.rpt -pb uart_top_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Thu Apr  2 13:38:42 2026...
+INFO: [Common 17-206] Exiting Vivado at Mon Apr 13 11:01:44 2026...
