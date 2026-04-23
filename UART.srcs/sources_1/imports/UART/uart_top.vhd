@@ -15,7 +15,9 @@ entity uart_top is
         tx_parity : in std_logic;           -- 0 = par, 1 = ímpar
         
         tx_busy : out std_logic;            -- Indica transmissão em andamento
+        rx_busy : out std_logic;            -- Indica recepção em andamento
         tx : out std_logic                  -- Saída UART TX
+        rx : in std_logic                   -- Entrada UART RX
     );
 end uart_top;
 
@@ -49,26 +51,16 @@ begin
             o_tx => tx
         );
     
---    -- Instância do first in first out
---    fifo: entity work.fifo_tx
---        generic map(
---            n_data => open
---        );
---        port map (
---            i_clk => clk,
---            i_rst => rst,
---
---            -- Escrita
---        i_tx_data_in => tx_din,
---        i_tx_write => tx_ start,
---
---        -- Leitura
---        o_tx_data_out => tx_dout,
---        o_tx_read => tx_busy
---
---        -- Status
---        o_tx_full =>
---        o_tx_empty => o_tx_empty
---
---        );
+    -- Instância do receptor UART
+    receptor : entity work.uart_rx
+        port map (
+            i_clk => clk,
+            i_rst => rst,
+            i_baud_tick => baud_tick,
+            i_rx => rx,  -- Conectado a um pino de entrada para RX
+            i_rx_parity => tx_parity,  -- Paridade compartilhada
+            o_rx_data => tx_dout,  -- Dados recebidos são enviados para o transmissor
+            o_rx_busy => rx_busy  -- Indica recepção em andamento
+
+        );
 end Behavioral;

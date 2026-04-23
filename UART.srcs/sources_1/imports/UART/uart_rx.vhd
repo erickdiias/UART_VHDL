@@ -12,8 +12,6 @@ entity uart_rx is
 
         o_rx_data   : out std_logic_vector(7 downto 0);
         o_rx_busy   : out std_logic; -- Recepção em andamento
-        o_rx_valid  : out std_logic; -- Indica que os dados recebidos são válidos
-        o_rx_error  : out std_logic  -- Indica erro de paridade ou de bit de parada
     );
 end uart_rx;
 
@@ -31,10 +29,11 @@ begin
         if i_rst = '1' then
             state <= RX_IDLE;
             shift_reg <= (others => '0');
-            o_rx_busy <= '0';
             bit_count <= 0;
-            parity_bit <= '0';
+
             o_rx_data <= (others => '0');
+            o_rx_busy <= '0';
+
         elsif rising_edge(i_clk) then
             if i_baud_tick = '1' then
                 case state is
@@ -46,6 +45,8 @@ begin
                         end if;
 
                     when RX_START_BIT =>
+                        o_rx_busy <= '1';
+                        
                         if i_rx = '0' then
                             state <= RX_DATA_BIT;
                             bit_count <= 0;
@@ -60,6 +61,10 @@ begin
                         end if;
 
                     when RX_PARITY_BIT =>
+                        -- Cálculo da paridade 
+                        parity_bit <= shift_reg(0) xor shift_reg(1) xor shift_reg(2) xor shift_reg(3) xor shift_reg(4) xor shift_reg(5) xor shift_reg(6) xor shift_reg(7);
+
+
                         if parity_bit = i_rx then  -- Verifica a paridade
                             state <= RX_STOP_BIT;
                         else
