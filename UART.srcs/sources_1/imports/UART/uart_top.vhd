@@ -18,7 +18,7 @@ entity uart_top is
         rx_dout : out std_logic_vector(7 downto 0); -- Dados recebidos
         
         tx_busy : out std_logic;            -- Indica transmissão em andamento
-        rx_busy : out std_logic;            -- Indica recepção em andamento
+        rx_busy : out std_logic            -- Indica recepção em andamento
 
         -- tx : out std_logic                  -- Saída UART TX
         -- rx : in std_logic                   -- Entrada UART RX
@@ -66,8 +66,9 @@ begin
             i_rst => rst,
             i_baud_tick => baud_tick,
             i_rx => linha_de_transmissao,  -- Linha de transmissão conectada à entrada RX
-            i_rx_parity => parity,
             o_rx_data => rx_dout,
+            o_rx_done => open,
+            o_parity_error => open,
             o_rx_busy => rx_busy 
 
         );

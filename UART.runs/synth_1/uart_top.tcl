@@ -73,6 +73,7 @@ OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_vhdl -library xil_defaultlib {
   C:/Users/User/Desktop/UART_VHDL/UART.srcs/sources_1/imports/UART/baud_rate_gen.vhd
+  C:/Users/User/Desktop/UART_VHDL/UART.srcs/sources_1/new/uart_rx.vhd
   C:/Users/User/Desktop/UART_VHDL/UART.srcs/sources_1/imports/UART/uart_tx.vhd
   C:/Users/User/Desktop/UART_VHDL/UART.srcs/sources_1/imports/UART/uart_top.vhd
 }
