@@ -23,6 +23,7 @@ architecture Behavioral of uart_tx is
 
     signal bit_count : integer range 0 to 7 := 0;
     signal shift_reg : std_logic_vector(7 downto 0) := (others => '0');
+
     
     signal parity_bit : std_logic;
 
@@ -46,7 +47,7 @@ begin
                     --------------------------------------------------
                     when TX_IDLE =>
                         o_tx <= '1';
-                        -- o_tx_busy <= '0';
+                        o_tx_busy <= '0';
                         bit_count <= 0;
 
                         if i_tx_start = '1' then
@@ -61,7 +62,7 @@ begin
                         -- Cálculo da paridade 
                         parity_bit <= i_tx_data(0) xor i_tx_data(1) xor i_tx_data(2) xor i_tx_data(3) xor i_tx_data(4) xor i_tx_data(5) xor i_tx_data(6) xor i_tx_data(7);
 
-                        -- o_tx_busy <= '1';
+                        o_tx_busy <= '1';
                         bit_count <= 0;
                         state <= TX_DATA_BIT;
                     
@@ -89,14 +90,13 @@ begin
                     --------------------------------------------------
                     when TX_STOP_BIT =>
                         o_tx <= '1'; -- Stop bit
-                        -- o_tx_busy <= '1';
+                        o_tx_busy <= '1';
                         state <= TX_IDLE;
                 end case;
             end if;
         end if;
     end process;
 
-    -- Busy automático
-    o_tx_busy <= '1' when state /= TX_IDLE else '0';
+    -- o_tx_busy <= '1' when state /= TX_IDLE else '0';
 
 end Behavioral;
