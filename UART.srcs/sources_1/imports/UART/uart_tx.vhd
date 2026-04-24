@@ -1,5 +1,3 @@
-
-
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -20,7 +18,6 @@ end uart_tx;
 
 architecture Behavioral of uart_tx is
 
-    -- Maquina de estados para controle da transmissão
     type state_type is (TX_IDLE, TX_START_BIT, TX_DATA_BIT, TX_PARITY_BIT, TX_STOP_BIT);
     signal state : state_type := TX_IDLE;
 
@@ -45,6 +42,7 @@ begin
         elsif rising_edge(i_clk) then
             if i_baud_tick = '1' then
                 case state is
+                    
                     --------------------------------------------------
                     when TX_IDLE =>
                         o_tx <= '1';
