@@ -4,81 +4,147 @@ use ieee.numeric_std.all;
 
 entity uart_rx is
     port(
-        i_clk       : in std_logic;
-        i_rst       : in std_logic;
-        i_baud_tick : in std_logic;
-        i_rx        : in std_logic;
-        i_rx_parity : in std_logic; -- 0 = par, 1 = ímpar
+        i_clk           : in std_logic;
+        i_rst           : in std_logic;
+        i_baud_tick     : in std_logic;
+        i_rx            : in std_logic;
 
-        o_rx_data   : out std_logic_vector(7 downto 0);
-        o_rx_busy   : out std_logic; -- Recepção em andamento
+        o_rx_data       : out std_logic_vector(7 downto 0);
+        o_rx_done       : out std_logic;
+        o_parity_error  : out std_logic;
+        o_rx_busy       : out std_logic
     );
 end uart_rx;
 
 architecture Behavioral of uart_rx is
-    type state_type is (RX_IDLE, RX_START_BIT, RX_DATA_BIT, RX_PARITY_BIT, RX_STOP_BIT);
+
+    type state_type is (RX_IDLE, RX_START, RX_DATA, RX_PARITY, RX_STOP);
     signal state : state_type := RX_IDLE;
-    
-    signal bit_count : integer range 0 to 7 := 0;
+
+    -- sincronizador
+    signal rx_sync_0, rx_sync_1 : std_logic := '1';
+    signal rx_clean : std_logic;
+
+    signal bit_count_16x : integer range 0 to 15 := 0;
+    signal bit_count_7x  : integer range 0 to 7 := 0;
+
     signal shift_reg : std_logic_vector(7 downto 0) := (others => '0');
-    signal parity_bit : std_logic := '0';
+
+    signal parity_calc : std_logic := '0';
+
+    signal rx_done_reg : std_logic := '0';
+    signal parity_err_reg : std_logic := '0';
 
 begin
+
+    --------------------------------------------------
+    -- SINCRONIZADOR
+    process(i_clk)
+    begin
+        if rising_edge(i_clk) then
+            rx_sync_0 <= i_rx;
+            rx_sync_1 <= rx_sync_0;
+        end if;
+    end process;
+
+    rx_clean <= rx_sync_1;
+
+    --------------------------------------------------
+    -- FSM
     process(i_clk, i_rst)
     begin
         if i_rst = '1' then
             state <= RX_IDLE;
+            bit_count_16x <= 0;
+            bit_count_7x <= 0;
             shift_reg <= (others => '0');
-            bit_count <= 0;
-
-            o_rx_data <= (others => '0');
-            o_rx_busy <= '0';
+            parity_calc <= '0';
+            rx_done_reg <= '0';
+            parity_err_reg <= '0';
 
         elsif rising_edge(i_clk) then
+            rx_done_reg <= '0';
+
             if i_baud_tick = '1' then
                 case state is
+
+                    ------------------------------------------
                     when RX_IDLE =>
-                        o_rx_busy <= '0';
-                        bit_count <= 0;
-                        if i_rx = '0' then  -- Detecção do bit de início
-                            state <= RX_START_BIT;
+                        bit_count_16x <= 0;
+                        bit_count_7x <= 0;
+                        parity_calc <= '0';
+                        parity_err_reg <= '0';
+
+                        if rx_clean = '0' then -- Detecção do start bit
+                            state <= RX_START;
                         end if;
 
-                    when RX_START_BIT =>
-                        o_rx_busy <= '1';
-                        
-                        if i_rx = '0' then
-                            state <= RX_DATA_BIT;
-                            bit_count <= 0;
-                        end if;
-
-                    when RX_DATA_BIT =>
-                        shift_reg(bit_count) <= i_rx;  -- Armazena o bit recebido
-                        if bit_count = 7 then
-                            state <= RX_PARITY_BIT;
+                    ------------------------------------------
+                    when RX_START =>
+                        if bit_count_16x = 7 then -- Amostragem no meio do start bit
+                            if rx_clean = '0' then
+                                state <= RX_DATA;
+                                bit_count_16x <= 0;
+                            else
+                                state <= RX_IDLE; -- Falso start bit, volta para idle
+                            end if;
                         else
-                            bit_count <= bit_count + 1;
+                            bit_count_16x <= bit_count_16x + 1;
                         end if;
 
-                    when RX_PARITY_BIT =>
-                        -- Cálculo da paridade 
-                        parity_bit <= shift_reg(0) xor shift_reg(1) xor shift_reg(2) xor shift_reg(3) xor shift_reg(4) xor shift_reg(5) xor shift_reg(6) xor shift_reg(7);
+                    ------------------------------------------
+                    when RX_DATA =>
+                        if bit_count_16x = 15 then -- Amostragem no meio do bit de dados
+                            shift_reg(bit_count_7x) <= rx_clean; -- Armazena o bit recebido
 
+                            parity_calc <= parity_calc xor rx_clean;
 
-                        if parity_bit = i_rx then  -- Verifica a paridade
-                            state <= RX_STOP_BIT;
+                            if bit_count_7x = 7 then
+                                state <= RX_PARITY;
+                            else
+                                bit_count_7x <= bit_count_7x + 1;
+                            end if;
+
+                            bit_count_16x <= 0;
                         else
-                            state <= RX_IDLE;  -- Erro de paridade, volta para idle
+                            bit_count_16x <= bit_count_16x + 1;
                         end if;
 
-                    when RX_STOP_BIT =>
-                        if i_rx = '1' then  -- Verificação do bit de parada
-                            o_rx_data <= shift_reg;  -- Dados válidos, atualiza a saída
-                            o_rx_busy <= '0';  -- Indica que os dados estão prontos
+                    ------------------------------------------
+                    when RX_PARITY =>
+                        if bit_count_16x = 15 then -- Amostragem no meio do bit de paridade
+                            if parity_calc /= rx_clean then
+                                parity_err_reg <= '1'; -- Erro de paridade
+                            end if;
+
+                            state <= RX_STOP;
+                            bit_count_16x <= 0;
+                        else
+                            bit_count_16x <= bit_count_16x + 1;
                         end if;
-                        state <= RX_IDLE;  -- Volta para idle após a recepção
+
+                    ------------------------------------------
+                    when RX_STOP =>
+                        if bit_count_16x = 15 then -- Amostragem no meio do bit de stop
+                            if rx_clean = '1' then -- Verificação do stop bit
+                                o_rx_data <= shift_reg;
+                                rx_done_reg <= '1'; -- Dados recebidos com sucesso
+                            end if;
+
+                            state <= RX_IDLE;
+                        else
+                            bit_count_16x <= bit_count_16x + 1;
+                        end if;
 
                 end case;
             end if;
         end if;
     end process;
+
+    --------------------------------------------------
+    -- SAÍDAS
+    o_rx_done <= rx_done_reg;
+    o_parity_error <= parity_err_reg;
+    o_rx_busy <= '1' when state /= RX_IDLE else '0';
+
+end Behavioral;

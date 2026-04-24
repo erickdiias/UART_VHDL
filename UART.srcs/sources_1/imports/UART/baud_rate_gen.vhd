@@ -15,7 +15,7 @@ entity baud_rate_gen is
 end baud_rate_gen;
 
 architecture Behavioral of baud_rate_gen is
-    constant DIVISOR : integer := CLK_FREQ / BAUD_RATE;
+    constant DIVISOR : integer := CLK_FREQ / BAUD_RATE * 16; -- Oversampling de 16x para melhor sincronização
     signal counter : integer range 0 to DIVISOR - 1 := 0;
 begin
     process(clk, rst)

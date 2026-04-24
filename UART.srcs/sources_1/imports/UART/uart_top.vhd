@@ -10,22 +10,27 @@ entity uart_top is
     port (
         clk : in std_logic;                 -- Relógio do sistema
         rst : in std_logic;                 -- Reset assíncrono
-        tx_start : in std_logic;            -- Inicia transmissão
+
+        start : in std_logic;            -- Inicia transmissão
+        parity : in std_logic;           -- 0 = par, 1 = ímpar
+
         tx_din : in std_logic_vector(7 downto 0);  -- Dados a transmitir
-        tx_parity : in std_logic;           -- 0 = par, 1 = ímpar
+        rx_dout : out std_logic_vector(7 downto 0); -- Dados recebidos
         
         tx_busy : out std_logic;            -- Indica transmissão em andamento
         rx_busy : out std_logic;            -- Indica recepção em andamento
-        tx : out std_logic                  -- Saída UART TX
-        rx : in std_logic                   -- Entrada UART RX
+
+        -- tx : out std_logic                  -- Saída UART TX
+        -- rx : in std_logic                   -- Entrada UART RX
     );
 end uart_top;
 
 architecture Behavioral of uart_top is
     signal baud_tick : std_logic := '0';
-    signal tx_dout : std_logic_vector(7 downto 0);
+    signal linha_de_transmissao : std_logic := '1';  -- Linha de transmissão (idle é '1')
     
 begin
+    ----------------------------------------------------
     -- Instância do gerador de baud rate
     baud_gen : entity work.baud_rate_gen
         generic map (
@@ -38,29 +43,32 @@ begin
             baud_tick => baud_tick
         );
     
-    -- Instância do transmissor UART
+    ----------------------------------------------------
+    -- Instância do transmissor UART 
     transmissor : entity work.uart_tx
         port map (
             i_clk => clk,
             i_rst => rst,
             i_baud_tick => baud_tick,
-            i_tx_start => tx_start,
-            i_tx_data => tx_dout,
-            i_tx_parity => tx_parity,
-            o_tx_busy => tx_busy,
-            o_tx => tx
+            i_tx_start => start,
+            i_tx_data => tx_din,
+            i_tx_parity => parity,
+            o_tx => linha_de_transmissao,  -- Linha de transmissão conectada à saída TX
+            o_tx_busy => tx_busy
+            
         );
     
+    ----------------------------------------------------
     -- Instância do receptor UART
     receptor : entity work.uart_rx
         port map (
             i_clk => clk,
             i_rst => rst,
             i_baud_tick => baud_tick,
-            i_rx => rx,  -- Conectado a um pino de entrada para RX
-            i_rx_parity => tx_parity,  -- Paridade compartilhada
-            o_rx_data => tx_dout,  -- Dados recebidos são enviados para o transmissor
-            o_rx_busy => rx_busy  -- Indica recepção em andamento
+            i_rx => linha_de_transmissao,  -- Linha de transmissão conectada à entrada RX
+            i_rx_parity => parity,
+            o_rx_data => rx_dout,
+            o_rx_busy => rx_busy 
 
         );
 end Behavioral;
