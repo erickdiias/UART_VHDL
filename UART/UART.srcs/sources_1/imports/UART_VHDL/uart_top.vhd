@@ -18,10 +18,10 @@ entity uart_top is
         rx_dout : out std_logic_vector(7 downto 0); -- Dados recebidos
         
         tx_busy : out std_logic;            -- Indica transmissão em andamento
-        rx_busy : out std_logic            -- Indica recepção em andamento
+        rx_busy : out std_logic;            -- Indica recepção em andamento
 
-        -- tx : out std_logic                  -- Saída UART TX
-        -- rx : in std_logic                   -- Entrada UART RX
+        tx : out std_logic;                  -- Saída UART TX
+        rx : in std_logic                   -- Entrada UART RX
     );
 end uart_top;
 
@@ -38,9 +38,9 @@ begin
             BAUD_RATE => BAUD_RATE
         )
         port map (
-            clk => clk,
-            rst => rst,
-            baud_tick => baud_tick
+            i_clk => clk,
+            i_rst => rst,
+            o_baud_tick => baud_tick
         );
     
     ----------------------------------------------------
@@ -53,8 +53,8 @@ begin
             i_tx_start => start,
             i_tx_data => tx_din,
             i_tx_parity => parity,
-            o_tx => linha_de_transmissao,  -- Linha de transmissão conectada à saída TX
-            o_tx_busy => tx_busy
+            o_tx_busy => tx_busy,
+            o_tx => tx
             
         );
     
@@ -65,11 +65,9 @@ begin
             i_clk => clk,
             i_rst => rst,
             i_baud_tick => baud_tick,
-            i_rx => linha_de_transmissao,  -- Linha de transmissão conectada à entrada RX
+            i_rx => rx,  -- Entrada UART RX
             o_rx_data => rx_dout,
-            o_rx_done => open,
-            o_parity_error => open,
-            o_rx_busy => rx_busy 
+            o_rx_busy => rx_busy
 
-        );
+     );
 end Behavioral;
